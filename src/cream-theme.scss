@@ -1,0 +1,9 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+$crm-app-primary: mat-palette($mat-light-blue);
+$crm-app-secondary: mat-palette($mat-amber);
+$crm-app-warn: mat-palette($mat-red);
+$crm-app-theme: mat-light-theme($crm-app-primary, $crm-app-secondary, $crm-app-warn);
+
+@include angular-material-theme($crm-app-theme)

@@ -1,0 +1,15 @@
+@import 'cream-theme.scss';
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background: bisque !important;
+  margin: 0;
+  font-family: 'Kodchasan', sans-serif;
+}
+
+h1, h2 {
+  font-family: 'Orbitron', monospace;
+}
