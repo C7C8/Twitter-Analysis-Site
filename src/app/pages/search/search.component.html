@@ -1,0 +1,26 @@
+<div class="main">
+  <div class="center">
+    <h1 class="title">Twitter User Analyzer</h1>
+    <form (submit)="doSearch()">
+      <mat-card>
+        &gt;
+        <mat-form-field id="userfield">
+          <input matInput
+                 placeholder="Enter username..."
+                 name="user"
+                 [(ngModel)]="currentUser"
+                 [formControl]="userForm"
+                 [matAutocomplete]="auto">
+        </mat-form-field>
+        <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption>
+          <mat-option *ngFor="let user of filteredUsers | async" [value]="user.username">
+            {{user.fullname}}: {{user.username}}
+          </mat-option>
+        </mat-autocomplete>
+        &lt;
+        <br>
+        <button mat-raised-button color="primary" (click)="doSearch()">Search!</button>
+      </mat-card>
+    </form>
+  </div>
+</div>

@@ -38,15 +38,10 @@ export class APIAllTimeAnalysis extends APIResponse {
   data: UserData;
 }
 
-export class APIHourlyAnalysis extends APIResponse {
-  data: UserData[24];
-}
-
-// Might be redundant with the above... erg.
-export class APIWeeklyAnalysis extends APIResponse {
-  data: UserData[7];
+export class APIPointAnalysis extends APIResponse {
+  data: UserData[];
 }
 
 export class APIHourlyDailyAnalysis extends APIResponse {
-  data: UserData[7][24];
+  data: UserData[][];
 }
