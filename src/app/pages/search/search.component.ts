@@ -35,13 +35,17 @@ export class SearchComponent implements OnInit {
 
   async doSearch() {
     this.analyzing = true;
+    this.userForm.disable();
     const response = await this.dserv.anaylzeUser(this.currentUser);
     this.analyzing = false;
 
-    console.log(response);
     if (response.status === 'error') {
       this.snackbar.open(response.message, '', {duration: 2500});
+    } else {
+      this.router.navigate(['/analysis/' + this.currentUser]);
+      this.userForm.enable();
     }
+
   }
 
   filter(input: string): User[] {

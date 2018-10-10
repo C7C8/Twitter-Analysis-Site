@@ -5,11 +5,16 @@ html, body {
 }
 
 body {
-  background: bisque !important;
-  margin: 0;
+  background: antiquewhite !important;
   font-family: 'Kodchasan', sans-serif;
+  max-width: 80%;
+  margin: 0 auto;
 }
 
-h1, h2 {
+h1 {
   font-family: 'Orbitron', monospace;
+}
+
+h2, h3 {
+  margin-bottom: -0.5em;
 }

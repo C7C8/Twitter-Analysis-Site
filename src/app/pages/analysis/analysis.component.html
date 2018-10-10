@@ -1,0 +1,60 @@
+<h1 id="title">User Analysis</h1>
+<h1 id="subtitle">{{username}}</h1>
+
+<div class="nodata" *ngIf="alltime === undefined">
+  <mat-spinner [diameter]="40"></mat-spinner>
+</div>
+
+<div class="nodata" *ngIf="alltime === null">
+  <p class="warn-title"><b>NO DATA FOUND</b></p>
+  <p>This user hasn't been analyzed yet, or they don't exist.</p>
+</div>
+
+<div class="analysis-container" *ngIf="alltime">
+  <div class="left">
+    <h2>Results</h2>
+    <p>{{username}}'s tweets have been analyzed, and we've found some... uh, interesting things.
+      For example:</p>
+    <ul class="dashed">
+      <li>Did you know that {{username}} has at <i>least</i> {{alltime.total}} tweets? And those
+        are just the ones we found!
+      </li>
+      <li>On average {{username}}'s tweets are {{alltime.avg_len | number:'.0-0'}} characters long. Somehow that's
+        disappointing.
+      </li>
+      <li>{{username}} has written at least {{alltime.total_len}} characters; that's a little
+        unsettling...
+      </li>
+      <li>On average {{username}}'s sentiment score is about {{alltime.avg_sent | number:'0.2-3'}}.
+        <span *ngIf="alltime.avg_sent >= 0.3">How can anyone be <i>that</i> happy?</span>
+        <span *ngIf="alltime.avg_sent <= -0.3">Oh, how miserable!</span>
+        <span *ngIf="alltime.avg_sent < 0.3 && alltime.avg_sent > -0.3">Such unsurprising apathy...</span></li>
+    </ul>
+
+    <h3>How sentiments work</h3>
+    <p><i>Sentiment scales from -1 to 1, where 0 is neutral, 1 is completely positive, and -1 is
+    completely negative, otherwise known as "average" for people who go outside from time to
+    time.</i></p>
+  </div>
+
+  <div class="right">
+    <h2>{{username}}-Tweet-o-matic</h2>
+    <p>Thanks to the wonders of <s>markov chains</s> chipmunk slaves and <s>natural language
+    processing</s> &uuml;ber-tiny keyboads, we can now generate tweets from {{username}}
+    on the fly! Let's see what they look like...</p>
+
+    <table class="tweets-table">
+      <tr>
+        <th><b>Tweet</b></th>
+      </tr>
+      <tr *ngFor="let tweet of tweets"><td>"{{tweet}}"</td></tr>
+    </table>
+
+    <p>{{username}}? That's you. That's how dumb you sound.</p>
+
+    <p><i>Tweet content may be NSFW, depends on the user and how the <s>RNG</s> chipmunks are
+      feeling today.</i></p>
+
+  </div>
+
+</div>

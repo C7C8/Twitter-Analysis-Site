@@ -15,11 +15,13 @@ import {
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SearchComponent } from './pages/search/search.component';
+import { AnalysisComponent } from './pages/analysis/analysis.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SearchComponent
+    SearchComponent,
+    AnalysisComponent
   ],
   imports: [
     BrowserModule,
