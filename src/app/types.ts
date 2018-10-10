@@ -45,3 +45,13 @@ export class APIPointAnalysis extends APIResponse {
 export class APIHourlyDailyAnalysis extends APIResponse {
   data: UserData[][];
 }
+
+// Weird data formats to make D3 a little easier, because I'm running out of time...
+export class Mat1DVal {
+  val: number;
+  x: string;
+}
+
+export class Mat2DVal extends Mat1DVal {
+  y: string;
+}

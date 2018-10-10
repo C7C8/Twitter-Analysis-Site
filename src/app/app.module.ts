@@ -16,12 +16,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SearchComponent } from './pages/search/search.component';
 import { AnalysisComponent } from './pages/analysis/analysis.component';
+import { HeatmapComponent } from './pages/analysis/heatmap/heatmap.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchComponent,
-    AnalysisComponent
+    AnalysisComponent,
+    HeatmapComponent
   ],
   imports: [
     BrowserModule,

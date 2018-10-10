@@ -1,0 +1,18 @@
+#chart {
+  width: 1000px;
+  height: 750px;
+  margin: auto;
+}
+
+svg {
+  background: none;
+}
+
+.tooltip {
+  position: absolute;
+  text-align: left;
+  padding: 1em;
+  background: rgba(250, 250, 250, 0.75);
+  border-radius: 3px;
+  pointer-events: none;
+}

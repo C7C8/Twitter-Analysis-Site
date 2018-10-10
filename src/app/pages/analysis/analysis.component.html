@@ -10,6 +10,21 @@
   <p>This user hasn't been analyzed yet, or they don't exist.</p>
 </div>
 
+<div class="activity-container">
+  <h1>The &Uuml;ber-Sized VADER-Powered Activity Chart</h1>
+  <p>This is what you came here for, right? Don't lie, I know you just wanted to stalk your
+  real or imagined friend around the internet and figure out their schedule.</p>
+
+  <p>Well, now you can. I hope you're happy, you creep.</p>
+
+  <h1 class="title">Twitter Activity Heatmap</h1>
+
+  <twittalyzer-heatmap [hourly]="hourlyActivity"
+                       [weekly]="weeklyActivity"
+                       [matrix]="hourlyDailyActivity">
+  </twittalyzer-heatmap>
+</div>
+
 <div class="analysis-container" *ngIf="alltime">
   <div class="left">
     <h2>Results</h2>
@@ -56,12 +71,4 @@
 
 </div>
 
-<div class="activity-container">
-  <h1>The &Uuml;ber-Sized VADER-Powered Activity Chart</h1>
-  <p>This is what you came here for, right? Don't lie, I know you just wanted to stalk your
-  real or imagined friend around the internet and figure out their schedule.</p>
 
-  <p>Well, now you can. I hope you're happy, you creep.</p>
-
-  <h1 class="title">Twitter Activity Heatmap</h1>
-</div>
