@@ -2,12 +2,12 @@ h1 {
   text-align: center;
 }
 
-#title {
+.title {
   font-size: 1.5em;
   margin-bottom: 0;
 }
 
-#subtitle {
+.subtitle {
   font-size: 3.0em;
   margin-top: 0;
 }
@@ -65,6 +65,5 @@ h1 {
     .tweet {
       font-family: monospace;
     }
-
   }
 }
