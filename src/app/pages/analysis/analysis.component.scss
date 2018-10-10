@@ -61,14 +61,10 @@ h1 {
     h2 {
       text-align: right;
     }
-  }
 
-  .tweets-table {
-    td {
+    .tweet {
       font-family: monospace;
-      font-size: 1.2em;
     }
 
-    border: 2px groove rgba(17, 17, 17, 0.2);
   }
 }

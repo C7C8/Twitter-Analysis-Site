@@ -26,9 +26,9 @@
         unsettling...
       </li>
       <li>On average {{username}}'s sentiment score is about {{alltime.avg_sent | number:'0.2-3'}}.
-        <span *ngIf="alltime.avg_sent >= 0.3">How can anyone be <i>that</i> happy?</span>
-        <span *ngIf="alltime.avg_sent <= -0.3">Oh, how miserable!</span>
-        <span *ngIf="alltime.avg_sent < 0.3 && alltime.avg_sent > -0.3">Such unsurprising apathy...</span></li>
+        <span *ngIf="alltime.avg_sent >= 0.2">How can anyone be <i>that</i> happy?</span>
+        <span *ngIf="alltime.avg_sent <= -0.2">Misery on a whole other level, how delicious!</span>
+        <span *ngIf="alltime.avg_sent < 0.2 && alltime.avg_sent > -0.2">Such unsurprising apathy...</span></li>
     </ul>
 
     <h3>How sentiments work</h3>
@@ -43,12 +43,9 @@
     processing</s> &uuml;ber-tiny keyboads, we can now generate tweets from {{username}}
     on the fly! Let's see what they look like...</p>
 
-    <table class="tweets-table">
-      <tr>
-        <th><b>Tweet</b></th>
-      </tr>
-      <tr *ngFor="let tweet of tweets"><td>"{{tweet}}"</td></tr>
-    </table>
+    <ul class="dashed">
+      <li class="tweet" *ngFor="let tweet of tweets">{{tweet}}</li>
+    </ul>
 
     <p>{{username}}? That's you. That's how dumb you sound.</p>
 
