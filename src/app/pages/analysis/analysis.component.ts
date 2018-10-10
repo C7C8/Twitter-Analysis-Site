@@ -14,20 +14,77 @@ export class AnalysisComponent implements OnInit {
   username = '';
   tweets: string[] = [];
   alltime: UserData = undefined;
-  hourly: UserData[] = [];
-  weekly: UserData[] = [];
-  hourlyDaily: UserData[] = [];
+
+  hourlyActivity: number[] = [];
+  hourlySentiment: number[] = [];
+
+  weeklyActivity: number[] = [];
+  weeklySentiment: number[] = [];
+
+  hourlyDailyActivity: number[][] = [];
+  hourlyDailySentiment: number[][] = [];
 
   constructor(private route: ActivatedRoute, private dserv: DataService) {
     this.route.params.subscribe( params => this.username = params.username);
   }
 
   async ngOnInit() {
-    this.alltime = await this.dserv.getAlltimeStats(this.username);
-    this.hourly = await this.dserv.getHourlyStats(this.username);
-    this.weekly = await this.dserv.getWeeklyStats(this.username);
+    this.dserv.getAlltimeStats(this.username).then(data => this.alltime = data);
+    await this.dserv.getTweets(this.username).then(data => this.tweets = data);
+
+    const hourlyData: UserData[] = await this.dserv.getHourlyStats(this.username);
+    let max = 0;
+    for (const data of hourlyData) {
+      this.hourlyActivity.push(data.total);
+      if (data.total > max) {
+        max = data.total;
+      }
+
+      this.hourlySentiment.push(data.avg_sent);
+    }
+
+    // Normalize activity levels
+    if (max > 0) {
+      this.hourlyActivity = this.hourlyActivity.map(x => x / max);
+    }
+
+    const weeklyData = await this.dserv.getWeeklyStats(this.username);
+    max = 0;
+    for (const data of weeklyData) {
+      this.weeklyActivity.push(data.total);
+      if (data.total > max) {
+        max = data.total;
+      }
+
+      this.weeklySentiment.push(data.avg_sent);
+    }
+
+    // Normalize activity levels
+    if (max > 0) {
+      this.weeklyActivity = this.weeklyActivity.map(x => x / max);
+    }
+
     // @ts-ignore
-    this.hourlyDaily = (await this.dserv.getHourlyDailyStats(this.username)) as UserData[][];
-    this.tweets = await this.dserv.getTweets(this.username);
+    const hourlyDailyData: UserData[][] = await this.dserv.getHourlyDailyStats(this.username);
+    max = 0;
+    for (const dataArray of hourlyDailyData) {
+      const activityRet = [], sentimentRet = [];
+      for (const data of dataArray) {
+        activityRet.push(data.total);
+        if (data.total > max) {
+          max = data.total;
+        }
+
+        sentimentRet.push(data.avg_sent);
+      }
+
+      this.hourlyDailyActivity.push(activityRet);
+      this.hourlyDailySentiment.push(sentimentRet);
+    }
+
+    // Normalize activity levels
+    if (max > 0) {
+      this.hourlyDailyActivity = this.hourlyDailySentiment.map(x => x.map(y => y / max));
+    }
   }
 }
