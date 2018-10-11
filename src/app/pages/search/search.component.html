@@ -20,7 +20,7 @@
         </mat-autocomplete>
         &lt;
         <br>
-        <button mat-raised-button color="primary" (click)="doSearch()">Analyze!</button>
+        <button mat-raised-button color="primary" (click)="doSearch()" [disabled]="analyzing">Analyze!</button>
       </mat-card>
     </form>
   </div>
