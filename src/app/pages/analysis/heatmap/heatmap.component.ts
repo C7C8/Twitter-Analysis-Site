@@ -24,7 +24,7 @@ export class HeatmapComponent implements OnChanges {
   daynames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   times = ['12A', '1A', '2A', '3A', '4A', '5A', '6A', '7A', '8A', '9A', '10A', '11A',
            '12P', '1P', '2P', '3P', '4P', '5P', '6P', '7P', '8P', '9P', '10P', '11P'];
-  colorscale = chroma.scale(['blue', 'purple', 'black', 'orange', 'red']).domain([-1, 1]);
+  colorscale = chroma.scale(['purple', 'blue', 'black', 'orange', 'red']).domain([-1, 1]);
 
   constructor() { }
 
@@ -88,7 +88,7 @@ export class HeatmapComponent implements OnChanges {
     // Top line chart
     const topLine = d3.line()
       .x(d => d.x * ((this.width - this.margin.left - this.margin.right) / 23))
-      .y(d => (1-d.val) * this.margin.top / 2);
+      .y(d => (1-d.val) * (this.margin.top / 2));
 
     topchart.append('path')
       .datum(this.hourly)
@@ -114,6 +114,5 @@ export class HeatmapComponent implements OnChanges {
       .attr('stroke-linecap', 'round')
       .attr('stroke-width', 1.5)
       .attr('d', rightLine);
-
   }
 }

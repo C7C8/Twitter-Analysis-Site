@@ -1,7 +1,7 @@
 #chart {
   width: 1000px;
   height: 750px;
-  margin: auto;
+  margin: 1em;
 }
 
 svg {
@@ -15,4 +15,8 @@ svg {
   background: rgba(250, 250, 250, 0.75);
   border-radius: 3px;
   pointer-events: none;
+}
+
+svg {
+  display: block;
 }

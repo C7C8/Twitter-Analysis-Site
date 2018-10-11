@@ -81,6 +81,7 @@ export class AnalysisComponent implements OnInit {
     // Normalize activity levels
     if (max > 0) {
       this.hourlyDailyActivity = this.hourlyDailyActivity.map(o => ({val: o.val / max, x: o.x, y: o.y}));
+      this.hourlySentiment = this.hourlySentiment;
     }
   }
 }
