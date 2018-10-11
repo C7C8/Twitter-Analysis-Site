@@ -46,8 +46,8 @@ export class AnalysisComponent implements OnInit {
 
     // Normalize activity levels
     if (max > 0) {
-      this.hourlyActivity = this.hourlyActivity.map(i => ({val: (i.val || 0) / max, x: i.x}));
-
+      this.hourlyActivity = this.hourlyActivity.map(i => ({ val: (i.val || 0) / max, x: i.x }));
+    }
 
     const weeklyData = await this.dserv.getWeeklyStats(this.username);
     max = 0;

@@ -62,8 +62,8 @@ export class HeatmapComponent implements OnChanges {
       .enter()
       .append('rect')
       .attr('class', 'tile')
-      .attr('x', d => parseInt(d.y) * ((this.width - this.margin.left - this.margin.right) / 24))
-      .attr('y', d => parseInt(d.x) * ((this.height - this.margin.top - this.margin.bottom) / 7))
+      .attr('x', d => parseInt(d.y, 10) * ((this.width - this.margin.left - this.margin.right) / 24))
+      .attr('y', d => parseInt(d.x, 10) * ((this.height - this.margin.top - this.margin.bottom) / 7))
       .attr('width', (this.width - this.margin.left - this.margin.right) / 24)
       .attr('height', (this.height - this.margin.top - this.margin.bottom) / 7)
       .style('fill', d => {
@@ -72,24 +72,28 @@ export class HeatmapComponent implements OnChanges {
 
 
     // x axis
+    // @ts-ignore
     svg.append('g')
       .attr('class', 'xaxis')
       .attr('transform', `translate(0, ${this.height - this.margin.top - this.margin.bottom})`)
-      .call(d3.axisBottom(x).tickFormat(domainValue => this.times[domainValue]).tickSize(6))
+      .call(d3.axisBottom(x).tickFormat(domainValue => this.times[domainValue as any]).tickSize(6))
       .style('font-size', '1em');
 
     // y axis
+    // @ts-ignore
     svg.append('g')
       .attr('class', 'yaxis')
-      .call(d3.axisLeft(y).tickFormat(domainValue => this.daynames[domainValue]))
+      .call(d3.axisLeft(y).tickFormat(domainValue => this.daynames[domainValue as any]))
       .style('font-size', '0.9em');
 
 
     // Top line chart
+    // @ts-ignore
     const topLine = d3.line()
-      .x(d => d.x * ((this.width - this.margin.left - this.margin.right) / 23))
-      .y(d => (1-d.val) * (this.margin.top / 2));
+      .x((d: any) => d.x * ((this.width - this.margin.left - this.margin.right) / 23))
+      .y((d: any) => (1 - d.val) * (this.margin.top / 2));
 
+    // @ts-ignore
     topchart.append('path')
       .datum(this.hourly)
       .attr('class', 'line')
@@ -98,13 +102,14 @@ export class HeatmapComponent implements OnChanges {
       .attr('stroke-linejoin', 'round')
       .attr('stroke-linecap', 'round')
       .attr('stroke-width', 1.5)
-      .attr('d', topLine);
+      .attr('d', topLine as any);
 
    // Right line chart
    const rightLine = d3.line()
-     .x(d => (d.val) * this.margin.right / 2 )
-     .y(d => d.x * ((this.height) / 7));
+     .x((d: any) => (d.val) * this.margin.right / 2 )
+     .y((d: any) => d.x * ((this.height) / 7));
 
+    // @ts-ignore
     rightchart.append('path')
       .datum(this.weekly)
       .attr('class', 'line')
@@ -113,6 +118,6 @@ export class HeatmapComponent implements OnChanges {
       .attr('stroke-linejoin', 'round')
       .attr('stroke-linecap', 'round')
       .attr('stroke-width', 1.5)
-      .attr('d', rightLine);
+      .attr('d', rightLine as any);
   }
 }
