@@ -15,10 +15,10 @@ export class HeatmapComponent implements OnChanges {
   @Input() weekly: Mat1DVal[];
   @Input() matrix: Mat2DVal[];
   @Input() margin = {
-    top: 75,
-    right: 15,
-    bottom: 125,
-    left: 85
+    top: 50,
+    right: 100,
+    bottom: 25,
+    left: 90
   };
 
   daynames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
@@ -42,10 +42,17 @@ export class HeatmapComponent implements OnChanges {
     const y = d3.scaleLinear().range([0, this.height - this.margin.bottom - this.margin.top]).domain([0, 6]);
 
     // Add chart element
-    const svg = d3.select('#chart')
+    let svg = d3.select('#chart')
       .append('svg')
       .attr('width', this.width)
-      .attr('height', this.height)
+      .attr('height', this.height);
+    const topchart = svg
+      .append('g')
+      .attr('transform', `translate(${this.margin.left}, 0)`);
+    const rightchart = svg
+      .append('g')
+      .attr('transform', `translate(${this.width - this.margin.left}, ${this.margin.top})`);
+    svg = svg
       .append('g')
       .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`);
 
@@ -63,6 +70,7 @@ export class HeatmapComponent implements OnChanges {
         return this.colorscale(d.val).hex();
       });
 
+
     // x axis
     svg.append('g')
       .attr('class', 'xaxis')
@@ -70,9 +78,42 @@ export class HeatmapComponent implements OnChanges {
       .call(d3.axisBottom(x).tickFormat(domainValue => this.times[domainValue]).tickSize(6))
       .style('font-size', '1em');
 
+    // y axis
     svg.append('g')
       .attr('class', 'yaxis')
       .call(d3.axisLeft(y).tickFormat(domainValue => this.daynames[domainValue]))
       .style('font-size', '0.9em');
+
+
+    // Top line chart
+    const topLine = d3.line()
+      .x(d => d.x * ((this.width - this.margin.left - this.margin.right) / 23))
+      .y(d => (1-d.val) * this.margin.top / 2);
+
+    topchart.append('path')
+      .datum(this.hourly)
+      .attr('class', 'line')
+      .attr('fill', 'none')
+      .attr('stroke', 'steelblue')
+      .attr('stroke-linejoin', 'round')
+      .attr('stroke-linecap', 'round')
+      .attr('stroke-width', 1.5)
+      .attr('d', topLine);
+
+   // Right line chart
+   const rightLine = d3.line()
+     .x(d => (d.val) * this.margin.right / 2 )
+     .y(d => d.x * ((this.height) / 7));
+
+    rightchart.append('path')
+      .datum(this.weekly)
+      .attr('class', 'line')
+      .attr('fill', 'none')
+      .attr('stroke', 'steelblue')
+      .attr('stroke-linejoin', 'round')
+      .attr('stroke-linecap', 'round')
+      .attr('stroke-width', 1.5)
+      .attr('d', rightLine);
+
   }
 }
