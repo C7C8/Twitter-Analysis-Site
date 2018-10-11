@@ -38,14 +38,14 @@ export class HeatmapComponent implements OnChanges {
       return;
     }
 
-    const x = d3.scaleLinear().range([0, this.width]).domain([0, 23]);
-    const y = d3.scaleLinear().range([0, this.height]).domain([0, 6]);
+    const x = d3.scaleLinear().range([0, this.width - this.margin.right - this.margin.left]).domain([0, 23]);
+    const y = d3.scaleLinear().range([0, this.height - this.margin.bottom - this.margin.top]).domain([0, 6]);
 
     // Add chart element
     const svg = d3.select('#chart')
       .append('svg')
-      .attr('width', this.width + this.margin.left + this.margin.right)
-      .attr('height', this.height + this.margin.top + this.margin.bottom)
+      .attr('width', this.width)
+      .attr('height', this.height)
       .append('g')
       .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`);
 
@@ -66,6 +66,13 @@ export class HeatmapComponent implements OnChanges {
     // x axis
     svg.append('g')
       .attr('class', 'xaxis')
-      .attr('transform', `translate(0, ${this.height - this.margin.top - this.margin.bottom})`);
+      .attr('transform', `translate(0, ${this.height - this.margin.top - this.margin.bottom})`)
+      .call(d3.axisBottom(x).tickFormat(domainValue => this.times[domainValue]).tickSize(6))
+      .style('font-size', '1em');
+
+    svg.append('g')
+      .attr('class', 'yaxis')
+      .call(d3.axisLeft(y).tickFormat(domainValue => this.daynames[domainValue]))
+      .style('font-size', '0.9em');
   }
 }
