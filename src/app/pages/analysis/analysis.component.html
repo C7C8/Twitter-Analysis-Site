@@ -56,19 +56,24 @@
 </div>
 
 <div class="activity-container">
-  <h1>The &Uuml;ber-Sized VADER-Powered Activity Chart</h1>
+  <h1>The &Uuml;ber-Sized VADER-Powered Heatmap Charts</h1>
   <p>This is what you came here for, right? Don't lie, I know you just wanted to stalk your
   real or imagined friend around the internet and figure out their schedule.</p>
 
-  <p>Well, now you can. I hope you're happy, you creep.</p>
-
-  <h1 class="title">Twitter Sentiment Heatmap</h1>
-
-  <twittalyzer-heatmap [hourly]="hourlySentiment"
-                       [weekly]="weeklySentiment"
-                       [matrix]="hourlyDailySentiment"
-                       *ngIf="hourlySentiment.length > 0 && weeklySentiment.length > 0 && hourlyDailySentiment.length > 0">
-  </twittalyzer-heatmap>
+  <p>Well, now you can. I hope you're happy, you creep. Sentiment is on the left,
+  overall activity is on the right.</p>
+  <div class="heatmap-container">
+    <twittalyzer-heatmap [hourly]="hourlySentiment"
+                         [weekly]="weeklySentiment"
+                         [matrix]="hourlyDailySentiment"
+                         *ngIf="hourlySentiment.length > 0 && weeklySentiment.length > 0 && hourlyDailySentiment.length > 0">
+    </twittalyzer-heatmap>
+    <twittalyzer-heatmap [hourly]="hourlyActivity"
+                         [weekly]="weeklyActivity"
+                         [matrix]="hourlyDailyActivity"
+                         *ngIf="hourlySentiment.length > 0 && weeklySentiment.length > 0 && hourlyDailySentiment.length > 0">
+    </twittalyzer-heatmap>
+  </div>
 
   <p>This graph shows a heatmap of the user's sentiment for every hour of the
   week; positive is red, negative is purple, and neutral is black (or just lack
